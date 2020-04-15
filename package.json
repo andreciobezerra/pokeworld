@@ -1,0 +1,29 @@
+{
+  "name": "pokeworld",
+  "version": "1.0.0",
+  "description": "A Pokemon wiki",
+  "main": "index.js",
+  "scripts": {
+    "start": "BROWSER=chromium-browser BROWSER_ARGS=--incognito react-scripts start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrécio Bezerra <andreciobezerra@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
