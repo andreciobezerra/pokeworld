@@ -1,0 +1,28 @@
+.header-container{
+  display: flex;
+  height: 100px;
+  border-bottom: 1px solid #ddd;
+  color: #ddd;
+}
+
+.header-logo{
+  height: 80px;
+}
+
+.links-container{
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.header-links{
+  margin: auto 15px;
+  text-decoration: none;
+  color: #ddd;
+  font-size: large;
+}
+
+.header-links:hover{
+  color: yellow;
+  font-size: x-large;
+}
