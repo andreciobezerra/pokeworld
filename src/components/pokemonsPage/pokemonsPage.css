@@ -1,8 +1,0 @@
-.pokemon-galery{
- display: grid;
- grid-template-columns: repeat(2, 1fr);
- grid-gap: 20px;
- list-style: none;
- justify-items: center;
- margin: 20px auto;
-}
