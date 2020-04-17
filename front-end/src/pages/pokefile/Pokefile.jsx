@@ -4,42 +4,23 @@
  * @date 15/04/2020
  */
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { isAuthenticated } from '../../lib/authFunctions'
 import { upper } from '../../lib/auxiliarFunctions'
-import api from '../../lib/api'
+import { useFetchOnePokemon } from '../../lib/hooks'
 import './pokefile.css'
 
 const Pokefile = (props) => {
-  const [loading, setLoading] = useState(true)
-  const [pokemon, setPokemon] = useState('')
-  const [img, setImg] = useState()
-
-  useEffect(() => {
-    const loadPokemons = async () => {
-      try {
-        const response = await api.get(props.match.params.name)
-        const img = response.data.sprites['front_default']
-        setPokemon(response.data)
-        setImg(img)
-        setLoading(false)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    loadPokemons()
-  }, [props.match.params.name])
-
+  const [pokemon, img, loading] = useFetchOnePokemon(props.match.params.name)
 
   if (!isAuthenticated()) { return window.location.href = '/signup' }
 
   return (
     <div className='pokefile-container'>
-      {(loading) ? <h2>Loading...</h2> :
+      {(loading) ? <h2 className='loading'>Loading...</h2> :
         <section className='pokefile'>
           <div className='pokefile-img'>
-            <img src={img} alt={upper(pokemon.name)} />
+            <img src={(img) ? img : '../images/no-img.png'} alt={upper(pokemon.name)} />
           </div>
           <div>
             <p>Name: {upper(pokemon.name)}</p>

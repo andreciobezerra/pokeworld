@@ -6,40 +6,27 @@
 
 /* eslint-disable react/prop-types */
 
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import './pokemonCard.css'
 import { upper } from '../../lib/auxiliarFunctions'
-import api from '../../lib/api'
+import { useFetchOnePokemon } from '../../lib/hooks'
+import './pokemonCard.css'
 
 const PokemonCard = (props) => {
-  const [pokemon, setPokemon] = useState(props.pokemon)
-  const [img, setImg] = useState()
-
-  useEffect(() => {
-    async function loadPokemons() {
-      try {
-        const response = await api.get(pokemon.name)
-        const img = response.data.sprites['front_default']
-        setImg(img)
-        setPokemon(response.data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    loadPokemons()
-  }, [pokemon.name])
+  const [pokemon, img, loading] = useFetchOnePokemon(props.pokemon.name)
 
   return (
-    <Link to ={`pokemon/${pokemon.name}`}  className='pokemon-link'>
-      <div className='pokemon-card'>
-        <img src={img} alt={upper(pokemon.name)} title={upper(pokemon.name)} className='img-card' />
-        <div className='pokemon-info'>
-          <h2>{pokemon.name}</h2>
-          <p>Click for more details!</p>
-        </div>
-      </div>
+    <Link to={`pokemon/${pokemon.name}`} className='pokemon-link'>
+      {
+        (loading) ? <h2>Loading...</h2> :
+          <div className='pokemon-card'>
+            <img src={(img) ? img : '../images/no-img.png'} alt={upper(pokemon.name)} title={upper(pokemon.name)} className='img-card' />
+            <div className='pokemon-info'>
+              <h2>{pokemon.name}</h2>
+              <p>Click for more details!</p>
+            </div>
+          </div>
+      }
     </Link>
   )
 }

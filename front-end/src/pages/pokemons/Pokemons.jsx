@@ -4,8 +4,9 @@
  * @date 15/04/2020
 */
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { chunk } from '../../lib/auxiliarFunctions'
+import { useFetchData } from '../../lib/hooks'
 import api from '../../lib/api'
 import PokemonsPage from '../../components/pokemonsPage/PokemonsPage'
 import { Button } from '@material-ui/core'
@@ -16,50 +17,42 @@ import FastForwardIcon from '@material-ui/icons/FastForward';
 import './pokemons.css'
 
 const Pokemons = () => {
-  const [pokemons, setPokemons] = useState([])
+  const [pokemons, loading] = useFetchData(api.getPokemons)
   const [page, setPage] = useState(0)
-
-  useEffect(() => {
-    const loadPokemons = async () => {
-      try {
-        const response = await api.getPokemons()
-        setPokemons(response)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    loadPokemons()
-  }, [])
 
   // The next operation go to slice the pokemons arrays in groups of 10 
   let groups = chunk(pokemons, 10)
 
   return (
     <section>
-      <h1 className='titles'>Pokemons</h1>
-      <PokemonsPage pokemons={groups[page]} />
-      <div className='buttonSection'>
-        {(page < groups.length - 1 && page > 0) ?
-          <div className='buttonGroup4'>
-            <Button variant='contained' color='primary' title='first page' onClick={() => setPage(0)}><FastRewindIcon /></Button>
-            <Button variant='contained' color='primary' title='previous page' onClick={() => setPage(page - 1)}><ArrowLeftIcon /></Button>
-            <Button variant='contained' color='primary' title='next page' onClick={() => setPage(page + 1)}><ArrowRightIcon /></Button>
-            <Button variant='contained' color='primary' title='last page' onClick={() => setPage(groups.length - 1)}><FastForwardIcon /></Button>
+      {(loading) ? <h2 className='loading'>Loading...</h2> :
+        <div>
+          <h1 className='titles'>Pokemons</h1>
+          <PokemonsPage pokemons={groups[page]} />
+          <div className='buttonSection'>
+            {(page < groups.length - 1 && page > 0) ?
+              <div className='buttonGroup4'>
+                <Button variant='contained' color='primary' title='first page' onClick={() => setPage(0)}><FastRewindIcon /></Button>
+                <Button variant='contained' color='primary' title='previous page' onClick={() => setPage(page - 1)}><ArrowLeftIcon /></Button>
+                <Button variant='contained' color='primary' title='next page' onClick={() => setPage(page + 1)}><ArrowRightIcon /></Button>
+                <Button variant='contained' color='primary' title='last page' onClick={() => setPage(groups.length - 1)}><FastForwardIcon /></Button>
+              </div>
+              :
+              (page === 0) ?
+                <div className='buttonGroup2'>
+                  <Button variant='contained' color='primary' title='next page' onClick={() => setPage(page + 1)}><ArrowRightIcon /></Button>
+                  <Button variant='contained' color='primary' title='last page' onClick={() => setPage(groups.length - 1)}><FastForwardIcon /></Button>
+                </div>
+                :
+                <div className='buttonGroup2'>
+                  <Button variant='contained' color='primary' title='first page' onClick={() => setPage(0)}><FastRewindIcon /></Button>
+                  <Button variant='contained' color='primary' title='previous page' onClick={() => setPage(page - 1)}><ArrowLeftIcon /></Button>
+                </div>
+            }
           </div>
-          :
-          (page === 0) ?
-            <div className='buttonGroup2'>
-              <Button variant='contained' color='primary' title='next page' onClick={() => setPage(page + 1)}><ArrowRightIcon /></Button>
-              <Button variant='contained' color='primary' title='last page' onClick={() => setPage(groups.length - 1)}><FastForwardIcon /></Button>
-            </div>
-            :
-            <div className='buttonGroup2'>
-              <Button variant='contained' color='primary' title='first page' onClick={() => setPage(0)}><FastRewindIcon /></Button>
-              <Button variant='contained' color='primary' title='previous page' onClick={() => setPage(page - 1)}><ArrowLeftIcon /></Button>
-            </div>
-        }
-      </div>
+        </div>
+
+      }
 
     </section>
   )

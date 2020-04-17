@@ -28,3 +28,7 @@ body {
   margin:10px auto;
   color: red;
 }
+
+.loading{
+  color: #ddd;
+}
