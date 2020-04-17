@@ -9,3 +9,7 @@
 ## Plus
 
 ### criar um userHook para o fetch
+### tratar erros
+### img para pokemons sem imagens
+### design responsivo
+### deploy
