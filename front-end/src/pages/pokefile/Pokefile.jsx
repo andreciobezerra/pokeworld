@@ -27,12 +27,12 @@ const Pokefile = (props) => {
         console.log(error)
       }
     }
-    
+
     loadPokemons()
   }, [props.match.params.name])
-  
-  
-  if (!isAuthenticated()) { return window.location.href='/'}   
+
+
+  if (!isAuthenticated()) { return window.location.href = '/signup' }
 
   return (
     <div className='pokefile-container'>

@@ -23,4 +23,6 @@
 
 .signup-from>input,Button{
   height: 10vh;
+  padding: 10px;
 }
+
