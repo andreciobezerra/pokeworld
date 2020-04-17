@@ -1,0 +1,11 @@
+.type-card{
+  color:#ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  border: 1px solid #3f51b5;
+  width: 90%;
+  padding: 2%;
+  text-decoration: none;
+}

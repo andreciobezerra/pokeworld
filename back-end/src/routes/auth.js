@@ -20,7 +20,6 @@ authRouter.post(
   [body('username').escape().trim(), body('email').escape().trim(), body('password').escape().trim()],
   (req, res) => {
     let hashedPassword = bcrypt.hashSync(req.body.password, 8)
-
     User.create(
       { username: req.body.username, email: req.body.email, password: hashedPassword },
       (err, user) => {

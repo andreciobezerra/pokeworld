@@ -14,6 +14,4 @@ export const chunk = (arr, amount, result = []) => {
 
 export const upper = (str) => str.replace(str.charAt(0), str.charAt(0).toUpperCase())
 
-export const getImg = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-
 export const alphaSort = (arr) => [...arr].sort((a, b) => a.name > b.name ? 1 : -1)

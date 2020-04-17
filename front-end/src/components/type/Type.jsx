@@ -6,14 +6,14 @@
 
 /* eslint-disable react/prop-types */
 import React from 'react'
+import './type.css'
 
 const Type = (props) => {
-return(
-  <div>
-    <h2>{props.type.name}</h2>
-    <span>{props.type.url}</span>
-  </div>
-)
+  return (
+    <section className='type-card'>
+      {props.type.name}
+    </section>
+  )
 }
 
 export default Type 

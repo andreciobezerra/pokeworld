@@ -5,10 +5,13 @@
 */
 
 import React from 'react'
+import './ability.css'
 
 const Ability = (props) => {
-  return(
-    <div> {props.ability.name}</div>
+  return (
+    <section className='ability-card'>
+      {props.ability.name}
+    </section>
   )
 }
 

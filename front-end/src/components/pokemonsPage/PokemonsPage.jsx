@@ -13,9 +13,9 @@ import './pokemonsPage.css'
 const PokemonsPage = (props) => {
 
   return (
-    <div className='pokemon-galery'>
+    <section className='pokemon-galery'>
       {props.pokemons.map(pokemon => <PokemonCard pokemon={pokemon} key={pokemon.name}/>)}
-    </div>
+    </section>
   )
 }
 

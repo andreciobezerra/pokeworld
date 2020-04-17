@@ -1,0 +1,22 @@
+.pokefile-container{
+  display: flex;
+  justify-content: center;
+  color:#ddd;
+  font-size: large;
+}
+
+.pokefile{
+  margin-top: 10vh;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.pokefile>div{
+  border-top: 1px solid #ddd ;
+  padding: 25px;
+}
+
+.pokefile-img{
+  display: flex;
+  justify-content: center;
+}

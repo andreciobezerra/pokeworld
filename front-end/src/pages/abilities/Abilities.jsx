@@ -7,6 +7,7 @@
 import React, { useState, useEffect } from 'react'
 import api from '../../lib/api'
 import Ability from '../../components/ability/Ability'
+import './abilites.css'
 
 
 const Abilities = () => {
@@ -26,8 +27,11 @@ const Abilities = () => {
   }, [])
 
   return (
-    <section>
-      {abilities.map(ability =><Ability ability={ability} key={ability.name}/>)}
+    <section >
+      <h1 className='titles'>Abilities</h1>
+      <div className='ability-galery'>
+        {abilities.map(ability => <Ability ability={ability} key={ability.name} />)}
+      </div>
     </section>
   )
 }

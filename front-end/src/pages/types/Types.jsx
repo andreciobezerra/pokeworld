@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import api from '../../lib/api'
 import Type from '../../components/type/Type'
+import './types.css'
 
 const Types = () => {
   const [types, setTypes] = useState([])
@@ -20,7 +21,10 @@ const Types = () => {
 
   return (
     <section>
-      {types.map(type => <Type type={type} key={type.name}/>)}
+      <h1 className='titles'>Types</h1>
+      <div className='type-galery'>
+        {types.map(type => <Type type={type} key={type.name} />)}
+      </div>
     </section>
   )
 }

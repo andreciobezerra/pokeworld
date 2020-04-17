@@ -7,33 +7,40 @@
 /* eslint-disable react/prop-types */
 
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './pokemonCard.css'
-import { upper, getImg } from '../../lib/auxiliarFunctions'
+import { upper } from '../../lib/auxiliarFunctions'
 import api from '../../lib/api'
 
 const PokemonCard = (props) => {
   const [pokemon, setPokemon] = useState(props.pokemon)
-  
+  const [img, setImg] = useState()
+
   useEffect(() => {
-    async function loadPokemons(){
+    async function loadPokemons() {
       try {
-        const response = await api.get(props.pokemon.name)
+        const response = await api.get(pokemon.name)
+        const img = response.data.sprites['front_default']
+        setImg(img)
         setPokemon(response.data)
-        
       } catch (error) {
         console.log(error)
       }
     }
 
     loadPokemons()
-  }, [props.pokemon.name])
+  }, [pokemon.name])
 
   return (
-    <div className='pokemon-card'>
-      {}
-      <img src={getImg(pokemon.id)} alt={upper(pokemon.name)} title={upper(pokemon.name)} className='img-card' />
-      <h2>{upper(pokemon.name)}</h2>
-    </div>
+    <Link to ={`pokemon/${pokemon.name}`}  className='pokemon-link'>
+      <div className='pokemon-card'>
+        <img src={img} alt={upper(pokemon.name)} title={upper(pokemon.name)} className='img-card' />
+        <div className='pokemon-info'>
+          <h2>{pokemon.name}</h2>
+          <p>Click for more details!</p>
+        </div>
+      </div>
+    </Link>
   )
 }
 

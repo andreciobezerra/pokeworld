@@ -37,6 +37,7 @@ const Pokemons = () => {
 
   return (
     <section>
+      <h1 className='titles'>Pokemons</h1>
       <PokemonsPage pokemons={groups[page]} />
       <div className='buttonSection'>
         {(page < groups.length - 1 && page > 0) ?
