@@ -8,14 +8,19 @@ import React, { useState } from 'react'
 import { Button } from '@material-ui/core'
 import { handleLogin } from '../../lib/handleFunctions'
 import './login.css'
+
 const Login = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  let error = props.match.params.error
+  const [error, setError] = useState(false)
 
   const toSubmit = async (e) => {
     e.preventDefault()
-    await handleLogin({ email, password })
+    try {
+      await handleLogin({ email, password })
+    } catch (err) {
+      setError(true)
+    }
   }
 
   return (
@@ -25,8 +30,8 @@ const Login = (props) => {
       </div>
       <div className='login'>
         <img src="./images/poke-logo.gif" alt="logo" />
-        {<h2 className='error-msg'> Ops! Something is wrong!</h2> && error}
         <form onSubmit={toSubmit} className='login-from'>
+          {error && <h2 className='error-msg'> Ops! Something is wrong!</h2>}
           <input type='email' placeholder='Email' onChange={(e) => setEmail(e.target.value)} required />
           <input type='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} minLength={8} required />
           <Button type='submit' variant='contained' color='primary' title='next page'>Login</Button>

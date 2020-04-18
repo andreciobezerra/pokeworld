@@ -12,27 +12,15 @@ const endpoint = (process.env.NODE_ENV === 'development') ? process.env.REACT_AP
 const api = axios.create({ baseURL: endpoint })
 
 export const handleSignup = async (user) => {
-  let ok =true
-  try {
     let response = await api.post('/signup', user)
     login(response.token)
     window.location.href = '/'
-  } catch (error) {
-    console.log(error)
-    ok = false
-  }  finally {
-    return ok
-  }
 }
 
 export const handleLogin = async (user) => {
-  try {
     let response = await api.post('/login', user)
     login(response.token)
-    window.location.href = '/'
-  } catch (error) {
-    console.log(error)
-  }
+    window.location.href = '/' 
  }
 
 export const handleLogout = () => {
