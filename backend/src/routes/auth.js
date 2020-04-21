@@ -3,13 +3,12 @@
  * @author Andrécio Costa Bezerra
  * @date 16/04/2020
 */
-
-import { Router } from 'express'
-import { body } from 'express-validator'
-import * as jwt from 'jsonwebtoken'
-import * as bcrypt from 'bcryptjs'
-import User from '../models/user'
-import verifyToken from '../lib/verifyToken'
+const { Router } = require('express')
+const { body } = require('express-validator')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+const User = require('../models/user')
+const verifyToken = require('../lib/verifyToken')
 
 
 const authRouter = Router()
@@ -45,7 +44,7 @@ authRouter.post(
       if (!passwordIsValid) { return res.status(401).send({ auth: false, token: null }) }
 
       const token = jwt.sign({ id: user._id }, secret, { expiresIn: 86400 })
-
+   
       return res.status(200).send({ auth: true, token })
     })
   })
@@ -60,4 +59,4 @@ authRouter.get('/me', verifyToken, (req, res) => {
 })
 
 
-export default authRouter
+module.exports = authRouter

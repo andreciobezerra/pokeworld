@@ -8,8 +8,10 @@
 
 ## Plus
 
+### corrigir a sanitização no back
 ### criar um userHook para o fetch OK
 ### tratar erros OK
 ### img para pokemons sem imagens OK
 ### design responsivo
+### nome do usuario no heard
 ### deploy

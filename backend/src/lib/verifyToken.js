@@ -4,10 +4,11 @@
  * @date 16/04/2020
 */
 
-import { verify } from 'jsonwebtoken';
+const { verify } = require('jsonwebtoken')
 
 const verifyToken = (req, res, next) => {
   const token = req.headers['x-access-token']
+  console.log(token)
   if (!token) { return res.status(403).send({ auth: false, message: 'No token provided.' }) }
 
   verify(token, process.env.SECRET, (err, decoded) => {
@@ -17,4 +18,4 @@ const verifyToken = (req, res, next) => {
   });
 }
 
-export default verifyToken
+module.exports = verifyToken
